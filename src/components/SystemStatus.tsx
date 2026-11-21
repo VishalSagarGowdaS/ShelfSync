@@ -31,7 +31,7 @@ export function SystemStatus() {
 
   const connect = async () => {
     const clean = url.trim().replace(/\/+$/, "");
-    if (!/^https?:\/\/.+/i.test(clean)) return toast.error("Enter the full backend URL, e.g. https://shopsphere-api.onrender.com");
+    if (!/^https?:\/\/.+/i.test(clean)) { toast.error("Enter the full backend URL, e.g. https://shopsphere-api.onrender.com"); return; }
     setTesting(true);
     try {
       const r = await fetch(`${clean}/api/health`, { headers: { Accept: "application/json" } });

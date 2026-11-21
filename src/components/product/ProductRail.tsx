@@ -33,7 +33,7 @@ export function ProductRail({ title, subtitle, section, icon, limit = 8 }: { tit
       {q.isError ? (
         <ErrorState message={errorMessage(q.error)} onRetry={() => q.refetch()} />
       ) : (
-        <div className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div className="no-scrollbar flex snap-x gap-4 overflow-x-auto pb-4 pt-1">
           {(q.data ?? Array.from({ length: 5 }, () => null)).map((p, i) => (
             <div key={p?.id ?? i} className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[23%] xl:w-[19%]">
               {p ? <ProductCard product={p} /> : <ProductCardSkeleton />}

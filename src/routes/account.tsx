@@ -60,8 +60,8 @@ function ProfileCard() {
         className="mt-4 space-y-4"
         onSubmit={(e) => {
           e.preventDefault();
-          if (fullName.trim().length < 2) return toast.error("Enter your full name");
-          if (phone.trim() && !PHONE_RE.test(phone.trim())) return toast.error("Enter a valid 10-digit mobile number");
+          if (fullName.trim().length < 2) { toast.error("Enter your full name"); return; }
+          if (phone.trim() && !PHONE_RE.test(phone.trim())) { toast.error("Enter a valid 10-digit mobile number"); return; }
           m.mutate();
         }}
       >
@@ -116,9 +116,9 @@ function AddressesCard() {
               className="grid gap-3 sm:grid-cols-2"
               onSubmit={(e) => {
                 e.preventDefault();
-                if (a.fullName.trim().length < 2 || a.line1.trim().length < 8 || a.city.trim().length < 2 || !a.state) return toast.error("Please fill in all address fields");
-                if (!PHONE_RE.test(a.phone.trim())) return toast.error("Enter a valid 10-digit mobile number");
-                if (!PINCODE_RE.test(a.pincode.trim())) return toast.error("Enter a valid 6-digit PIN code");
+                if (a.fullName.trim().length < 2 || a.line1.trim().length < 8 || a.city.trim().length < 2 || !a.state) { toast.error("Please fill in all address fields"); return; }
+                if (!PHONE_RE.test(a.phone.trim())) { toast.error("Enter a valid 10-digit mobile number"); return; }
+                if (!PINCODE_RE.test(a.pincode.trim())) { toast.error("Enter a valid 6-digit PIN code"); return; }
                 add.mutate();
               }}
             >

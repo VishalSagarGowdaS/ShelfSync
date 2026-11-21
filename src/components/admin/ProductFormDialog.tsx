@@ -32,14 +32,14 @@ export function ProductFormDialog({ open, onOpenChange, product, onSubmit, pendi
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (f.name.trim().length < 3) return toast.error("Product name must be at least 3 characters");
-    if (f.description.trim().length < 10) return toast.error("Description must be at least 10 characters");
-    if (!/^(https?:\/\/|\/)/.test(f.imageUrl.trim())) return toast.error("Enter a valid image URL");
-    if (!(f.originalPrice > 0) || !(f.sellingPrice > 0)) return toast.error("Prices must be greater than zero");
-    if (f.sellingPrice > f.originalPrice) return toast.error("Selling price cannot exceed the original price");
-    if (!Number.isInteger(f.stock) || f.stock < 0) return toast.error("Stock must be a whole number ≥ 0");
-    if (f.rating < 0 || f.rating > 5) return toast.error("Rating must be between 0 and 5");
-    if (f.city.trim().length < 2) return toast.error("Enter the dispatch city");
+    if (f.name.trim().length < 3) { toast.error("Product name must be at least 3 characters"); return; }
+    if (f.description.trim().length < 10) { toast.error("Description must be at least 10 characters"); return; }
+    if (!/^(https?:\/\/|\/)/.test(f.imageUrl.trim())) { toast.error("Enter a valid image URL"); return; }
+    if (!(f.originalPrice > 0) || !(f.sellingPrice > 0)) { toast.error("Prices must be greater than zero"); return; }
+    if (f.sellingPrice > f.originalPrice) { toast.error("Selling price cannot exceed the original price"); return; }
+    if (!Number.isInteger(f.stock) || f.stock < 0) { toast.error("Stock must be a whole number ≥ 0"); return; }
+    if (f.rating < 0 || f.rating > 5) { toast.error("Rating must be between 0 and 5"); return; }
+    if (f.city.trim().length < 2) { toast.error("Enter the dispatch city"); return; }
     onSubmit({ ...f, name: f.name.trim(), description: f.description.trim(), imageUrl: f.imageUrl.trim(), city: f.city.trim(), specifications: Object.fromEntries(specs.filter(([k, v]) => k.trim() && v.trim()).map(([k, v]) => [k.trim(), v.trim()])) });
   };
 

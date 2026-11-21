@@ -96,7 +96,7 @@ function CheckoutPage() {
 
   const set = (k: keyof CheckoutInput) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
-    if (errors[k]) setErrors((x) => ({ ...x, [k]: undefined }));
+    if (errors[k]) setErrors((x) => { const n = { ...x }; delete n[k]; return n; });
   };
   const inputProps = (k: keyof CheckoutInput) => ({
     id: k,
@@ -140,7 +140,7 @@ function CheckoutPage() {
               <div className="sm:col-span-2"><Field id="address" label="Address (house no., street, area)" error={errors.address}><Textarea rows={2} autoComplete="street-address" {...inputProps("address")} /></Field></div>
               <Field id="city" label="City" error={errors.city}><Input autoComplete="address-level2" {...inputProps("city")} /></Field>
               <Field id="state" label="State" error={errors.state}>
-                <Select value={form.state} onValueChange={(v) => { setForm((f) => ({ ...f, state: v })); setErrors((x) => ({ ...x, state: undefined })); }}>
+                <Select value={form.state} onValueChange={(v) => { setForm((f) => ({ ...f, state: v })); setErrors(({ state: _s, ...rest }) => rest); }}>
                   <SelectTrigger id="state" aria-invalid={!!errors.state} className={cn(errors.state && "border-destructive")}><SelectValue placeholder="Select state" /></SelectTrigger>
                   <SelectContent>{INDIAN_STATES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
                 </Select>
